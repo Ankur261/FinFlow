@@ -1,0 +1,47 @@
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userprefs
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+bin/
+obj/
+*.exe
+*.dll
+*.pdb
+*.tmp
+*.log
+*.bak
+*.ncb
+*.scc
+*.vspscc
+*.vssscc
+
+# Packages
+packages/
+*.nupkg
+
+# Rider
+.idea/
+
+# Dotnet tool files
+.config/dotnet-tools.json
+
+# Test results
+TestResults/
+
+# Resharper
+*.DotSettings.user
+
+# Mac
+.DS_Store
+
+# Linux
+Thumbs.db
+
+# Misc
+*.pid
+*.psmdcp
