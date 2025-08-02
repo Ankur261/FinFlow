@@ -34,13 +34,6 @@
 
 ---
 
-## 🗂️ Project Structure
-
-### React Frontend (`client`)
-
-
----
-
 ## ⚙️ Getting Started
 
 ### Prerequisites
