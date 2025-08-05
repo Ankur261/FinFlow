@@ -13,6 +13,16 @@ namespace server_dot_net
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowFrontend",
+                    policy =>
+                    {
+                        policy.WithOrigins("http://localhost:5173") // frontend origin
+                              .AllowAnyHeader()
+                              .AllowAnyMethod();
+                    });
+            });
             builder.Services.AddControllers();
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
             options.UseMySql(
@@ -30,6 +40,7 @@ namespace server_dot_net
             builder.Services.AddScoped<ICustomerService, CustomerService>();
 
             var app = builder.Build();
+            app.UseCors("AllowFrontend");
 
             if (app.Environment.IsDevelopment())
             {
