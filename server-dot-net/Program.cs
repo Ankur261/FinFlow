@@ -37,6 +37,10 @@ namespace server_dot_net
             builder.Services.AddScoped<IMerchantRepository, MerchantRepository>();
             builder.Services.AddScoped<IMerchantService, MerchantService>();
 
+            //  Register Invoice services
+            builder.Services.AddScoped<IInvoiceRepository, InvoiceRepository>();
+            builder.Services.AddScoped<IInvoiceService, InvoiceService>();
+
 
             var app = builder.Build();
             app.UseCors("AllowFrontend");
