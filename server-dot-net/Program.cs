@@ -36,7 +36,8 @@ namespace server_dot_net
             // Register services/repositories here
             builder.Services.AddScoped<IMerchantRepository, MerchantRepository>();
             builder.Services.AddScoped<IMerchantService, MerchantService>();
-
+            builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+            builder.Services.AddScoped<ICustomerService, CustomerService>();
 
             var app = builder.Build();
             app.UseCors("AllowFrontend");
