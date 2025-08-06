@@ -37,6 +37,11 @@ namespace server_dot_net.Services
             var invoices = await _repo.GetByMerchantIdAsync(merchantId);
             return invoices.Select(MapToDto).ToList();
         }
+        public async Task<List<Invoice>> GetAllAsync()
+        {
+            return await _repo.GetAllAsync();
+        }
+
 
         public async Task<List<InvoiceResponseDto>> GetByCustomerIdAsync(long customerId)
         {

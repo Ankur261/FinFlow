@@ -16,6 +16,10 @@ namespace server_dot_net.Repositories
         {
             _context = context;
         }
+        public async Task<List<Invoice>> GetAllAsync()
+        {
+            return await _context.Invoice.ToListAsync();
+        }
 
         public async Task<Invoice> CreateAsync(Invoice invoice)
         {

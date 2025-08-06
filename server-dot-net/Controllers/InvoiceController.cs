@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using server_dot_net.DTOs;
+using server_dot_net.Model;
 using server_dot_net.Services;
 using System.Threading.Tasks;
 namespace server_dot_net.Controllers
@@ -23,6 +24,13 @@ namespace server_dot_net.Controllers
             var result = await _service.CreateAsync(dto);
             return Ok(result);
         }
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Invoice>>> GetAllInvoices()
+        {
+            var invoices = await _service.GetAllAsync();
+            return Ok(invoices);
+        }
+
 
         [HttpGet("merchant/{merchantId}")]
         public async Task<IActionResult> GetByMerchant(long merchantId)

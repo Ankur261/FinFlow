@@ -5,6 +5,8 @@ namespace server_dot_net.Repositories
 {
     public interface IInvoiceRepository
     {
+        Task<List<Invoice>> GetAllAsync();
+
         Task<Invoice> CreateAsync(Invoice invoice);
         Task<List<Invoice>> GetByMerchantIdAsync(long merchantId);
         Task<List<Invoice>> GetByCustomerIdAsync(long customerId);
