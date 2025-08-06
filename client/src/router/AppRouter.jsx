@@ -1,4 +1,5 @@
 import AdminDashBoard from '../pages/AdminDashboard'
+import CustomerDashBoard from '../pages/CustomerDashboard';
 import MerchantDashBoard from '../pages/MerchantDashboard'
 import InvoiceByCustomer from '../pages/InvoiceByCustomer';
 import CreateInvoice from '../pages/CreateInvoice';
@@ -18,7 +19,8 @@ function AppRouter() {
             <Route path="/invoice/customer" element={<InvoiceByCustomer />} />
             <Route path="/invoice/merchant" element={<InvoiceByMerchant />} />
             <Route path="/invoice" element={<AllInvoices />} />
-       
+            <Route path="/customerdashboard" element={< CustomerDashBoard/>} />
+
         </Routes>
     )
 }

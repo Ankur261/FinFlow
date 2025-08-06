@@ -41,6 +41,8 @@ namespace server_dot_net
             builder.Services.AddScoped<IInvoiceRepository, InvoiceRepository>();
             builder.Services.AddScoped<IInvoiceService, InvoiceService>();
 
+            builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+            builder.Services.AddScoped<ICustomerService, CustomerService>();
 
             var app = builder.Build();
             app.UseCors("AllowFrontend");
