@@ -3,6 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using server_dot_net.Data;
 using server_dot_net.Repositories;
 using server_dot_net.Services;
+//using Microsoft.AspNetCore.Builder;
+//using Microsoft.Extensions.DependencyInjection;
+//using Microsoft.Extensions.Hosting;
+
 
 namespace server_dot_net
 {
@@ -36,6 +40,9 @@ namespace server_dot_net
             // Register services/repositories here
             builder.Services.AddScoped<IMerchantRepository, MerchantRepository>();
             builder.Services.AddScoped<IMerchantService, MerchantService>();
+            builder.Services.AddScoped<IExpenseService, ExpenseService>();
+            builder.Services.AddScoped<IExpenseRepository, ExpenseRepository>();
+
 
 
             var app = builder.Build();
@@ -45,6 +52,7 @@ namespace server_dot_net
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
+                //app.UseDeveloperExceptionPage();
             }
 
             app.UseHttpsRedirection();
