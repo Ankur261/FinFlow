@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace server_dot_net.Model
 {
-   // [Table("invoice")]
+    [Table("invoice")]
     public class Invoice
     {
         [Key]

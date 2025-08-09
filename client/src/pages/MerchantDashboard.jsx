@@ -4,17 +4,18 @@ import Loading from './Loading';
 
 
 
-export default function MerchantDashBoard() {
+export default function MerchantDashboard() {
 
     const [data, setData] = useState();
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        axios.get("https://localhost:7261/api/Merchant")
+        axios.get("https://localhost:7261/api/Dashboard/merchant", {
+            headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
+        })
             .then((response) => {
                 setData(response.data);
-                console.log(response.data);
                 setLoading(false);
             })
             .catch((err) => {
@@ -35,17 +36,10 @@ export default function MerchantDashBoard() {
     }
     return (
         <div>
-            {
-                data.map((value, index) => {
-
-                    return(
-                       <div key={index}>
-                         {value.businessName}, 
-                        {value.businessType}
-                       </div>
-                        )
-                })
-            }
+            <h1>{data.businessName} Dashboard</h1>
+            <p>Email: {data.email}</p>
+            <p>Business Type: {data.businessType}</p>
+            <p>Total Invoices: {data.totalInvoices}</p>
         </div>
     );
 }

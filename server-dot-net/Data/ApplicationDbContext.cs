@@ -12,7 +12,7 @@ namespace server_dot_net.Data
         public DbSet<Merchant> Merchants { get; set; }
         public DbSet<Admin> Admins { get; set; }
         public DbSet<Expense> Expenses { get; set; }
-        public DbSet<Invoice> Invoice { get; set; }
+        public DbSet<Invoice> Invoices { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
         public DbSet<LoanRequest> LoanRequests { get; set; }
         public DbSet<ActivityLog> ActivityLogs { get; set; }
