@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using server_dot_net.Data;
-using System.Linq;
 using System.Security.Claims;
 
 namespace server_dot_net.Controllers
@@ -20,7 +19,7 @@ namespace server_dot_net.Controllers
 
         // CUSTOMER DASHBOARD
         [HttpGet("customer")]
-        [Authorize(Roles = "Customer")]
+        [Authorize(Roles = "customer")]
         public IActionResult GetCustomerDashboard()
         {
             var email = User.FindFirstValue(ClaimTypes.Email);
@@ -43,7 +42,7 @@ namespace server_dot_net.Controllers
 
         // MERCHANT DASHBOARD
         [HttpGet("merchant")]
-        [Authorize(Roles = "Merchant")]
+        [Authorize(Roles = "merchant")]
         public IActionResult GetMerchantDashboard()
         {
             var email = User.FindFirstValue(ClaimTypes.Email);
@@ -65,7 +64,7 @@ namespace server_dot_net.Controllers
 
         // ADMIN DASHBOARD
         [HttpGet("admin")]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         public IActionResult GetAdminDashboard()
         {
             var totalCustomers = _context.Customers.Count();

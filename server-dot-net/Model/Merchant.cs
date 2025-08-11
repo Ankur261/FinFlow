@@ -11,20 +11,20 @@ namespace server_dot_net.Model
 
         [Column("business_name")]
         [Required]
-        public string BusinessName { get; set; }
+        public string? BusinessName { get; set; }
 
         [Required]
-        public string Email { get; set; }
+        public string? Email { get; set; }
 
-        public string Phone { get; set; }
+        public string? Phone { get; set; }
 
         [Required]
-        public string Password { get; set; }
+        public string? Password { get; set; }
 
         [Column("business_type")]
-        public string BusinessType { get; set; } // Electricity, Water, Gas
+        public string? BusinessType { get; set; } // Electricity, Water, Gas
 
-        public string Status { get; set; }
+        public string? Status { get; set; }
 
         public ICollection<Invoice> Invoices { get; set; }
     }

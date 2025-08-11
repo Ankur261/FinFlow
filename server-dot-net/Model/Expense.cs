@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace server_dot_net.Model
 {
+    [Table("expense")]
     public class Expense
     {
         [Key]
@@ -18,6 +19,7 @@ namespace server_dot_net.Model
         public DateTime Date { get; set; }
 
         [ForeignKey("Customer")]
+        [Column("customer_id")]
         public long CustomerId { get; set; }
 
         public Customer Customer { get; set; }

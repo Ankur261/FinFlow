@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using server_dot_net.Data;
 using server_dot_net.Repositories;
+using server_dot_net.Repository;
+using server_dot_net.Service;
 using server_dot_net.Services;
 using System.Text;
 
@@ -44,7 +46,8 @@ namespace server_dot_net
             ValidIssuer = builder.Configuration["Jwt:Issuer"],
             ValidAudience = builder.Configuration["Jwt:Audience"],
             IssuerSigningKey = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+                Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])),
+             RoleClaimType = "role"
         };
     });
 
@@ -56,12 +59,15 @@ namespace server_dot_net
             builder.Services.AddScoped<IMerchantRepository, MerchantRepository>();
             builder.Services.AddScoped<IMerchantService, MerchantService>();
 
-            //  Register Invoice services
             builder.Services.AddScoped<IInvoiceRepository, InvoiceRepository>();
             builder.Services.AddScoped<IInvoiceService, InvoiceService>();
 
             builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
             builder.Services.AddScoped<ICustomerService, CustomerService>();
+
+            builder.Services.AddScoped<IExpenseRepository, ExpenseRepository>();
+            builder.Services.AddScoped<IExpenseService, ExpenseService>();
+
 
             var app = builder.Build();
             app.UseCors("AllowFrontend");

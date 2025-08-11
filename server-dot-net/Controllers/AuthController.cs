@@ -37,7 +37,10 @@ namespace server_dot_net.Controllers
 
             // Check in all role tables
             var customer = await _context.Customers.FirstOrDefaultAsync(c => c.Email == request.Email);
-            var merchant = await _context.Merchants.FirstOrDefaultAsync(m => m.Email == request.Email);
+            var merchant = await _context.Merchants
+    .Where(m => m.Email != null && m.Email == request.Email)
+    .FirstOrDefaultAsync();
+
             var admin = await _context.Admins.FirstOrDefaultAsync(a => a.Email == request.Email);
 
             object user = customer ?? (object)merchant ?? admin;
@@ -65,6 +68,7 @@ namespace server_dot_net.Controllers
                 token,
                 role,
                 name = customer?.Name ?? merchant?.BusinessName ?? admin?.Name,
+                id = customer?.Id ?? merchant?.Id ?? admin?.Id,
             });
         }
 
@@ -74,17 +78,18 @@ namespace server_dot_net.Controllers
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
             var claims = new[]
-            {
-        new Claim(JwtRegisteredClaimNames.Sub, email),
-        new Claim(ClaimTypes.Role, role),
-        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-    };
+{
+    new Claim(JwtRegisteredClaimNames.Sub, email),
+    new Claim(ClaimTypes.Email, email),
+    new Claim(ClaimTypes.Role, role),
+    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+};
+
 
             var token = new JwtSecurityToken(
                 issuer: _config["Jwt:Issuer"],
                 audience: _config["Jwt:Audience"],
                 claims: claims,
-                expires: DateTime.Now.AddHours(2),
                 signingCredentials: credentials
             );
 

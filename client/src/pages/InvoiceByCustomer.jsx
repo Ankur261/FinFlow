@@ -1,65 +1,94 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import Loading from './Loading';
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./styles.css";
 
 export default function InvoiceByCustomer() {
+  const [invoices, setInvoices] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-    const [data, setData] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+  useEffect(() => {
+    const fetchInvoices = async () => {
+      try {
+        const customerId = localStorage.getItem("id");
+        const token = localStorage.getItem("token");
 
-    useEffect(() => {
-        axios.get("https://localhost:7261/api/invoice/customer/3")  // Get all invoices
-            .then((response) => {
-                setData(response.data);
-                console.log(response.data);
-                setLoading(false);
-            })
-            .catch((err) => {
-                setError(err.message);
-                setLoading(false);
-            });
-    }, []);
+        if (!customerId || !token) {
+          navigate("/login");
+          return;
+        }
 
-    if (loading) {
-        return <Loading />;
-    }
+        const res = await fetch(`https://localhost:7261/api/Invoice/customer/${customerId}`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
 
-    if (error) {
-        return <div>Error: {error}</div>;
-    }
+        if (res.ok) {
+          const data = await res.json();
+          setInvoices(data);
+        } else {
+          setError("Failed to fetch invoices");
+        }
+      } catch (err) {
+        setError("Network error occurred");
+      } finally {
+        setLoading(false);
+      }
+    };
 
-    return (
-        <div className="p-4">
-            <h2 className="text-2xl font-bold mb-4">All Invoices</h2>
-            <table className="table-auto w-full border">
-                <thead>
-                    <tr className="bg-gray-100">
-                        <th className="p-2 border">Invoice #</th>
-                        <th className="p-2 border">Amount</th>
-                        <th className="p-2 border">Status</th>
-                        <th className="p-2 border">Issue Date</th>
-                        <th className="p-2 border">Due Date</th>
-                        <th className="p-2 border">Customer ID</th>
-                        <th className="p-2 border">Merchant ID</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        data.map((inv, index) => (
-                            <tr key={index}>
-                                <td className="p-2 border">{inv.invoiceNumber}</td>
-                                <td className="p-2 border">₹{inv.amount}</td>
-                                <td className="p-2 border">{inv.status}</td>
-                                <td className="p-2 border">{inv.issueDate?.split('T')[0]}</td>
-                                <td className="p-2 border">{inv.dueDate?.split('T')[0]}</td>
-                                <td className="p-2 border">{inv.customerId}</td>
-                                <td className="p-2 border">{inv.merchantId}</td>
-                            </tr>
-                        ))
-                    }
-                </tbody>
-            </table>
-        </div>
-    );
+    fetchInvoices();
+  }, [navigate]);
+
+  if (loading) return <div className="loading-container">Loading invoices...</div>;
+
+  return (
+    <div className="invoices-container">
+      <div className="invoices-header">
+        <h2>My Invoices</h2>
+      </div>
+
+      {error && <div className="error-message">{error}</div>}
+
+      <div className="invoices-table-container">
+        {invoices.length > 0 ? (
+          <table className="invoices-table">
+            <thead>
+              <tr>
+                <th>Invoice #</th>
+                <th>Amount (₹)</th>
+                <th>Issue Date</th>
+                <th>Due Date</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {invoices.map((inv) => (
+                <tr key={inv.id} onClick={() => navigate(`/invoice/${inv.id}`)} className="invoice-row">
+                  <td>{inv.invoiceNumber}</td>
+                  <td className="amount-cell">{parseFloat(inv.amount).toFixed(2)}</td>
+                  <td>{new Date(inv.issueDate).toLocaleDateString()}</td>
+                  <td>{new Date(inv.dueDate).toLocaleDateString()}</td>
+                  <td>
+                    <span className={`status-badge ${inv.status.toLowerCase()}`}>
+                      {inv.status}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <div className="no-invoices">
+            <p>No invoices found</p>
+            <button 
+              className="primary-btn"
+              onClick={() => navigate("/create-invoice")}
+            >
+              Create Your First Invoice
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
 }
