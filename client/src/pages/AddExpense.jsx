@@ -37,7 +37,7 @@ export default function AddExpense() {
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
-      navigate("/my-expenses");
+      navigate("/customer/expense");
     } catch (error) {
       setError(error.response?.data?.message || "Error adding expense");
     } finally {

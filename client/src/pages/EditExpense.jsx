@@ -39,6 +39,15 @@ export default function EditExpense() {
     e.preventDefault();
     try {
       const token = localStorage.getItem("token");
+      console.log({
+          id: parseInt(id),
+          category,
+          amount: parseFloat(amount),
+          description,
+          date,
+          customerId: parseInt(localStorage.getItem("id")),
+          customerName: localStorage.getItem("name")
+        });
       await axios.put(
         `https://localhost:7261/api/Expense/${id}`,
         {

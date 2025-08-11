@@ -21,10 +21,12 @@ import AdminLayout from "../layouts/AdminLayout";
 import MerchantLayout from "../layouts/MerchantLayout";
 import CustomerLayout from "../layouts/CustomerLayout";
 import EditExpense from "../pages/EditExpense";
+import MainPage from "../pages/MainPage";
 
 function AppRouter() {
     return (
         <Routes>
+            <Route path="/" element={<MainPage />} />
             {/* Guest routes */}
             <Route
                 path="/login"

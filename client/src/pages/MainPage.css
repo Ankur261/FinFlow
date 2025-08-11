@@ -1,0 +1,235 @@
+/* ===== Main Page Styles ===== */
+.main-page {
+  font-family: 'Inter', Arial, sans-serif;
+  color: #1f2937;
+  line-height: 1.6;
+}
+
+/* Hero Section */
+.hero-section {
+  background: linear-gradient(135deg, #2563eb, #1e40af);
+  color: white;
+  padding: 2rem;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.main-nav {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.logo-icon {
+  font-size: 2rem;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.login-btn, .register-btn {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.login-btn {
+  background: transparent;
+  color: white;
+  border: 1px solid white;
+}
+
+.login-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.register-btn {
+  background: white;
+  color: #2563eb;
+  border: none;
+}
+
+.register-btn:hover {
+  background: #f0f0f0;
+}
+
+.hero-content {
+  max-width: 800px;
+  margin: auto;
+  padding: 4rem 1rem;
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.hero-content p {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+}
+
+.cta-btn {
+  background: #10b981;
+  color: white;
+  border: none;
+  padding: 0.75rem 2rem;
+  font-size: 1.1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.cta-btn:hover {
+  background: #059669;
+}
+
+/* Features Section */
+.features-section {
+  padding: 4rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.features-section h2 {
+  font-size: 2rem;
+  margin-bottom: 3rem;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.feature-card {
+  background: white;
+  border-radius: 10px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+}
+
+.feature-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.feature-card h3 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+/* Testimonials */
+.testimonials-section {
+  background: #f9fafb;
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 800px;
+  margin: 2rem auto;
+}
+
+.testimonial-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.testimonial-card p {
+  font-style: italic;
+  margin-bottom: 1.5rem;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.user-icon {
+  font-size: 1.5rem;
+}
+
+.user-name {
+  font-weight: 500;
+}
+
+/* CTA Section */
+.cta-section {
+  padding: 4rem 2rem;
+  text-align: center;
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: white;
+}
+
+.cta-section h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* Footer */
+.main-footer {
+  background: #1f2937;
+  color: white;
+  padding: 2rem;
+  text-align: center;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.footer-links a {
+  color: #9ca3af;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-links a:hover {
+  color: white;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .hero-content h1 {
+    font-size: 2.5rem;
+  }
+  
+  .nav-links {
+    gap: 0.5rem;
+  }
+}
